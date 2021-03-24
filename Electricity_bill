@@ -1,0 +1,26 @@
+#include<stdio.h>
+float current_bill(int);
+void main()
+{
+    int unit;
+    float bill;
+    printf("Enter the units :");
+    scanf("%d",&unit);
+    bill=current_bill(unit);
+    printf("You have charged %g for %d units",bill,unit);
+}
+float current_bill(int unit)
+{
+    if (unit>500)
+    {
+        return((300*2.75)+(200*4.80)+(unit-500)*5.20);
+    }
+    else if(unit>300 && unit<=500)
+    {
+        return((300*2.75)+(unit-300)*4.80);
+    }
+    else
+    {
+        return unit*2.75;
+    }
+}
