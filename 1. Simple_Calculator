@@ -1,0 +1,123 @@
+#include<stdio.h>
+void add(int a,int b);
+void sub(int a,int b);
+void mul(int a,int b);
+void div(int a,int b);
+void mod(int a,int b);
+void power(int a);
+int fact(int a);
+void main()
+{
+    int operator;
+    int n1,n2;
+    printf("1.Addition");
+    printf("\n2.Subtraction");
+    printf("\n3.Multiplication");
+    printf("\n4.Division");
+    printf("\n5.Modulo");
+    printf("\n6.Power");
+    printf("\n7.Factorial");
+    printf("\nEnter your operation :");
+    scanf("%d",&operator);
+    switch (operator)
+    {
+    case 1:
+        printf("\nEnter number 1:");
+        scanf("%d",&n1);
+        printf("\nEnter number 2:");
+        scanf("%d",&n2);
+        add(n1,n2);
+        break;
+    case 2:
+        printf("\nEnter number 1:");
+        scanf("%d",&n1);
+        printf("\nEnter number 2:");
+        scanf("%d",&n2);
+        sub(n1,n2);
+        break;
+    case 3:
+        printf("\nEnter number 1:");
+        scanf("%d",&n1);
+        printf("\nEnter number 2:");
+        scanf("%d",&n2);
+        mul(n1,n2);
+        break;
+    case 4:
+        printf("\nEnter number 1:");
+        scanf("%d",&n1);
+        printf("\nEnter number 2:");
+        scanf("%d",&n2);
+        div(n1,n2);
+        break;
+    case 5:
+        printf("\nEnter number 1:");
+        scanf("%d",&n1);
+        printf("\nEnter number 2:");
+        scanf("%d",&n2);
+        mod(n1,n2);
+        break;
+    case 6:
+        printf("Enter a number :");
+        scanf("%d",&n1);
+        power(n1);
+        break;
+    case 7:
+        printf("Enter a number :");
+        scanf("%d",&n1);
+        printf("Factorial of %d is %d",n1,fact(n1));
+        break;
+    
+    default:
+        printf("\n!!! Enter a valid operation !!!");
+    }
+}
+void add(int a,int b)
+{
+    int c;
+    c=a+b;
+    printf("\nThe addition of %d and %d is %d",a,b,c);
+}
+void sub(int a,int b)
+{
+    int temp,c;
+    if (b>a)
+    {
+        temp=a;
+        a=b;
+        b=temp;
+        c=a-b;
+        printf("\nThe subtraction of %d and %d is %d",a,b,c);
+    }
+    c=a-b;
+    printf("\nThe subtraction of %d and %d is %d",a,b,c);
+}
+void mul(int a,int b)
+{
+    int c;
+    c=a*b;
+    printf("\nThe multipliction of %d and %d is %d",a,b,c);
+}
+void div(int a,int b)
+{
+    int c;
+    c=a/b;
+    printf("\nThe division of %d and %d is %d",a,b,c);
+}
+void mod(int a,int b)
+{
+    int c;
+    c=a%b;
+    printf("\nThe modulo of %d and %d is %d",a,b,c);
+}
+void power(int a)
+{
+    int c;
+    c=a*a;
+    printf("The power of %d is %d",a,c);
+}
+int fact(int a)
+{
+    if (a==0)
+        return 1;
+    return a*fact(a-1);    
+}
