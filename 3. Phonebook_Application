@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<windows.h>
+void add_contacts();
+void search_contacts();
+void delete_contacts();
+void view_contacts();
+void main()
+{
+    system("cls");
+    printf("\t*****PHONE BOOK*****\n");
+    printf("\t 1. Add Contact\n");
+    printf("\t 2. Search Contact\n");
+    printf("\t 3. Delete Contact\n");
+    printf("\t 4. View All Contact\n");
+    printf("\t 5. Exit\n");
+    printf("Enter Your Choice:-");
+    int option;
+    scanf("%d",&option);
+    switch(option)
+    {
+    case 1:
+        add_contacts();
+        break;
+    case 2:
+        search_contacts();
+        break;
+    case 3:
+        delete_contacts();
+        break;
+    case 4:
+        view_contacts();
+        break;
+    case 5:
+        exit(0);
+    default:
+        main();
+    }
+}
+void add_contacts()
+{
+    FILE *fp;
+    fp=fopen("contact.txt","a+");
+    system("cls");
+    printf("\t*****ADD CONTACT*****");
+    printf("\n\tFirst_Name    :-");
+    char firstname[20];
+    scanf("%s",firstname);
+    printf("\n\tLast_Name    :-");
+    char lastname[20];
+    scanf("%s",lastname);
+    printf("\n\tLandline No. :-" );
+    char landline[20];
+    scanf("%s",landline);
+    printf("\n\tMobile No. :-" );
+    char mobileno[20];
+    scanf("%s",mobileno);
+    fprintf(fp,"%s %s %s %s\n",firstname,lastname,landline,mobileno);
+    fclose(fp);
+    printf("\n\tPRESS ANY KEY TO CONTINUE");
+    main();
+}
+void search_contacts()
+{
+    FILE *fp;
+    fp=fopen("contact.txt","r");
+    system("cls");
+    printf("\t*****SEARCH CONTACT*****");
+    printf("\n\t Enter Name :-");
+    char name[20];
+    scanf("%s",name);
+    char firstname[20],lastname[20],landline[20],mobileno[20];
+    while(fscanf(fp,"%s %s %s %s",firstname,lastname,landline,mobileno)!=EOF)
+    {
+        if(strcmp(name,firstname)==0)
+        {
+        printf("\n\t FIRST NAME    :-  %s",firstname);
+        printf("\n\t LAST NAME     :-  %s",lastname);
+        printf("\n\t LANDLINE NO.  :-  %s",landline);
+        printf("\n\t MOBILE NO.    :-  %s",mobileno);
+        }
+    }
+    fclose(fp);
+    printf("\n\tPRESS ANY KEY TO CONTINUE");
+    getch();
+    main();
+}
+void delete_contacts()
+{
+    FILE *fp,*fp1;
+    fp=fopen("contact.txt","r+");
+    fp1=fopen("temp.txt","w");
+    system("cls");
+    printf("\t*****DELETE CONTACT*****");
+    printf("\n\t Enter Name :-");
+    char name[20];
+    scanf("%s",name);
+    char firstname[20],lastname[20],landline[20],mobileno[20];
+    while(fscanf(fp,"%s %s %s %s",firstname,lastname,landline,mobileno)!=EOF)
+    {
+        if(strcmp(name,firstname)==0)
+        {
+            continue;
+        }
+        fprintf(fp1,"%s %s %s %s",firstname,lastname,landline,mobileno);
+    }
+    fclose(fp);
+    fclose(fp1);
+    fp=fopen("contact.txt","w");
+    fp1=fopen("temp.txt","r");
+    while(fscanf(fp,"%s %s %s %s",firstname,lastname,landline,mobileno)!=EOF)
+    {
+
+        fprintf(fp,"%s %s %s %s",firstname,lastname,landline,mobileno);
+    }
+    fclose(fp);
+    fclose(fp1);
+    remove("temp.txt");
+    printf("\n\tPRESS ANY KEY TO CONTINUE");
+    getch();
+    main();
+}
+void view_contacts()
+{
+    FILE *fp;
+    fp=fopen("contact.txt","r");
+    system("cls");
+    printf("\t*****ALL CONTACTS*****");
+    char firstname[20],lastname[20],landline[20],mobileno[20];
+    while(fscanf(fp,"%s %s %s %s",firstname,lastname,landline,mobileno)!=EOF)
+    {
+        printf("\n\t FIRST NAME    :-  %s",firstname);
+        printf("\n\t LAST NAME     :-  %s",lastname);
+        printf("\n\t LANDLINE NO.  :-  %s",landline);
+        printf("\n\t MOBILE NO.    :-  %s",mobileno);
+    }
+    fclose(fp);
+    printf("\n\tPRESS ANY KEY TO CONTINUE");
+    getch();
+    main();
+}
